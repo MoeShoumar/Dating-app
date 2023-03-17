@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->string('age');
+            $table->integer('age')->nullable();
             $table->string('location');
-            $table->string('gender');
+            $table->tinyInteger('gender');
             $table->string('bio')->nullable();
-            $table->string('pic');
+            $table->mediumText('pic')->nullable();
             $table->string('password');   
             $table->timestamps();
         });
