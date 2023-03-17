@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<!-- search_bar.addEventListener('keyup', () => {
+    if(search_bar.value.length > 0) {
+      axios({
+        "method": "get",
+        "url": `http://localhost/shoppero_backend/search.php?query=${search_bar.value}`
+      }).then((result) => {
+        console.log(result)
+        search_result.innerHTML = ''
+        if(result.data.length > 0 ) {
+          
+        result.data.forEach((result) => {
+          let product_card = `<div class="item-card-search">
+          <div class="item-img"><img id="add-to-wishlist" src="./assets/heart.png" /><img class="product-image" src="./${result.image}" /></div>
+          <div class="product_name"><h3>${result.product_name}</h3></div>
+          <div class="flex-box">
+            <h3>$${result.price}</h3>
+            <button type="button" onclick="addtoCart(${result.id})">Add to cart</button>
+          </div>
+        </div>`
+  
+        search_result.innerHTML += product_card;
+        })
+        } else {
+          search_result.innerHTML = 'No results!'
+        }
+      }).catch((err) => {
+          console.error(err)
+      });
+      container.classList.add('move-to-side')
+      if(container.style.display != 'none') {
+        const animate = setTimeout(() => {
+          container.style.display = 'none';
+        }, 300)
+      }
+    } else {
+      search_result.innerHTML = ''
+      container.classList.remove('move-to-side')
+      container.style.display = 'block';
+    }
+  }) -->
