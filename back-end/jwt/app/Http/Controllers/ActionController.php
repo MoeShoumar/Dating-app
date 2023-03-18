@@ -55,11 +55,18 @@ class ActionController extends Controller
     if (!$sender||!$receiver ){
         return response()->json(['message' => 'Invalid sender or receiver ID']);
     }
+    $block= blocks::where("sender_id", $sender_id)->where("receiver_id", $receiver_id)->first();
+    if($block){
+      $block->delete();
+      return response()->json(['message'=>'user unblocked']);
+    }
+    else{
     $block = new blocks;
     $block->receiver_id = $receiver_id;
     $block->sender_id = $sender_id;
     $block->save();
     return response()->json(['message'=>'user blocked']);
+    }
   }
 
   }
