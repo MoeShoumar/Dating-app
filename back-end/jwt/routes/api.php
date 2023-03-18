@@ -19,14 +19,14 @@ Route::group(['middleware' => 'api'], function($router) {
         Route::group(['prefix' => 'user'], function () {
             Route::get('/user/{id}', [UserController::class, "getuser"]);
             Route::get('/users', [UserController::class, "getusers"]);
-            Route::post('/messages/{id}', [UserController::class, "getmessage"]);
-            Route::post('/blocks/{id}', [UserController::class, "getblocks"]);
-            Route::post('/favorites/{id}', [UserController::class, "getfavorites"]);
+            Route::get('/messages/{sender_id}/{receiver_id}', [UserController::class, "getmessage"]);
+            Route::get('/blocks/{sender_id}/{receiver_id}', [UserController::class, "getblocks"]);
+            Route::get('/favorites/{id}', [UserController::class, "getfavorites"]);
             
         });
 
         Route::group(['prefix' => 'actions'], function () {
-            Route::post('/likeuser/{id}', [ActionController::class, "likeuser"]);
+            Route::post('/likeuser/{sender_id}/{receiver_id}', [ActionController::class, "likeuser"]);
             Route::post('/blockuser/{id}', [ActionController::class, "blockuser"]);
             Route::post('/sendmessage/{sender_id}/{receiver_id}', [ActionController::class, "sendmessage"]);
             Route::post('/addimage/{id}', [ActionController::class, "addimage"]);
