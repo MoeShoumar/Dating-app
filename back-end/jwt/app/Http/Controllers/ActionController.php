@@ -50,8 +50,8 @@ class ActionController extends Controller
     $block->sender_id = $sender_id;
     $block->save();
     return response()->json(['message'=>'user blocked']);
-
   }
+
 }
 
 

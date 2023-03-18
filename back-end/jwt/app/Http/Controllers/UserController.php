@@ -38,8 +38,8 @@ class UserController extends Controller
             "messages" =>  $messages
         ]);
     }
-    function getblocks($id){
-        $block = blocks::find($id);
+    function getblocks($sender_id, $receiver_id){
+        $block = blocks::where('sender_id', $sender_id)->where('receiver_id', $receiver_id)->get() ;
         return response()->json([
             "block" =>  $block
         ]);

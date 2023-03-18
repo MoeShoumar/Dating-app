@@ -21,7 +21,7 @@ Route::group(['middleware' => 'api'], function($router) {
             Route::get('/users', [UserController::class, "getusers"]);
             Route::get('/messages/{sender_id}/{receiver_id}', [UserController::class, "getmessage"]);
             Route::get('/blocks/{sender_id}/{receiver_id}', [UserController::class, "getblocks"]);
-            Route::get('/favorites/{id}', [UserController::class, "getfavorites"]);
+            Route::get('/favorites/{sender_id}/{receiver_id}', [UserController::class, "getfavorites"]);
             
         });
 
