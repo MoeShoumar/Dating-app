@@ -1,5 +1,5 @@
 const dating_pages = {};
-dating_pages.base_url = "http://localhost/hospital_fullstack/hospital_backend/";
+dating_pages.base_url = "http://127.0.0.1:8000/api/v0.0.1/";
 
 dating_pages.getAPI = async (api_url, api_token = null) => {
   try {
@@ -66,29 +66,33 @@ dating_pages.loadFor = (page) => {
 // };
 
 // sign-up
-dating_pages.load_signin = async () => {
+dating_pages.load_signup = async () => {
   const form_signup = document.getElementById("signup-form");
   form_signup.addEventListener("submit", async (event) => {
     event.preventDefault();
     const name = document.getElementById("name").value;
-
+    const password = document.getElementById("password").value;
+    const location = document.getElementById("location").value;
+    const bio = document.getElementById("bio").value;
+    const profile_pic = document.getElementById("profile_pic").value;
     const email = document.getElementById("email").value;
-    const gender = document.getElementById("gender").value;
-    const user_type = document.getElementById("user_typer").value;
-    const date_of_birth = document.getElementById("date_of_birth").value;
-    const signup_password = document.getElementById("signup-password").value;
+    const gender = document.querySelector('input[name="gender"]');
+    const age = document.getElementById("age").value;
+
     const signup_data = {
-      email: signup_email,
-      password: signup_password,
-      date_of_birth: date_of_birth,
-      user_type: user_type,
+      email: email,
+      password: password,
+      age: age,
       gender: gender,
       name: name,
+      location: location,
+      bio: bio,
     };
     console.log(signup_data);
-    const signup_url = dating_pages.base_url + "signup.php";
+    const signup_url = `${dating_pages.base_url}auth/register`;
     const response_signup = await dating_pages.postAPI(signup_url, signup_data);
     console.log(response_signup.data);
-    form_signup.style.display = "none";
+    window.location.href = "signin.html";
+    localStorage.setItem("jwt", response_signup.data.token);
   });
 };
