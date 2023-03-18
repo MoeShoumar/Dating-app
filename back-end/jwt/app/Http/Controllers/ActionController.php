@@ -12,7 +12,8 @@ use App\Models\added_pics;
 
 class ActionController extends Controller
 {
-  function sendmessage(Request $request, $sender_id,$receiver_id){
+  
+    function sendmessage(Request $request, $sender_id,$receiver_id){
     $sender = User::find($sender_id);
     $receiver= User::find($receiver_id);
     if (!$sender||!$receiver ){
@@ -36,6 +37,19 @@ class ActionController extends Controller
     $like->sender_id = $sender_id;
     $like->save();
     return response()->json(['message'=>'user added to favorites']);
+
+  }
+  function blockuser(Request $request, $sender_id,$receiver_id){
+    $sender = User::find($sender_id);
+    $receiver= User::find($receiver_id);
+    if (!$sender||!$receiver ){
+        return response()->json(['message' => 'Invalid sender or receiver ID']);
+    }
+    $block = new blocks;
+    $block->receiver_id = $receiver_id;
+    $block->sender_id = $sender_id;
+    $block->save();
+    return response()->json(['message'=>'user blocked']);
 
   }
 }
