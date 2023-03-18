@@ -44,11 +44,11 @@ class UserController extends Controller
             "block" =>  $block
         ]);
     }
-    function getfavorites($id){
-        $favorite = favorites::find($id);
-        return response()->json([
-            "favorite" =>  $favorite
-        ]);
+    
+
+    function getfavorites($sender_id, $receiver_id){
+       $favorites = favorites::where('sender_id',$sender_id)->where( 'receiver_id' ,$receiver_id)->get();
+       return response()->json(['favorites'=> $favorites]);
     }
 
 }
