@@ -12,20 +12,22 @@ use App\Models\added_pics;
 
 
 class UserController extends Controller
-{
+{   
+    // get all users
     function getusers(){
         $users = User::all();
         return response()->json([
             "articles" => $users
         ]);
     }
-
+    // get user
     function getuser($id){
         $user = user::find($id);
         return response()->json([
             "articles" => $user
         ]);
     }
+    // display sent and received messages
     function getmessage($sender_id, $receiver_id){
         $messages = Messages::where(function ($query) use ($sender_id, $receiver_id) {
             $query->where('sender_id', $sender_id)
@@ -39,6 +41,7 @@ class UserController extends Controller
             "messages" =>  $messages
         ]);
     }
+    // display blocked users
     function getblocks($sender_id, $receiver_id){
         $block = blocks::where('sender_id', $sender_id)->where('receiver_id', $receiver_id)->get();
         return response()->json([
@@ -46,13 +49,13 @@ class UserController extends Controller
         ]);
     }
     
-
+    // display liked
     function getfavorites($sender_id, $receiver_id){
        $favorites = favorites::where('sender_id',$sender_id)->where( 'receiver_id' ,$receiver_id)->get();
        return response()->json(['favorites'=> $favorites]);
     }
-
-    public function editprofile(Request $request)
+    // edit profile 
+    function editprofile(Request $request)
     {
         $user = User::find($request->id);
 

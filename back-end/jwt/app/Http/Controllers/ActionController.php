@@ -19,6 +19,7 @@ class ActionController extends Controller
     if (!$sender||!$receiver ){
         return response()->json(['message' => 'Invalid sender or receiver ID']);
     }
+    
     $message = new messages;
     $message->receiver_id = $receiver_id;
     $message->sender_id = $sender_id;
