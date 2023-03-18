@@ -25,19 +25,26 @@ class UserController extends Controller
             "articles" => $user
         ]);
     }
-    function getmessage(Request $request, $id){
-        $message = messages::find($id);
+    function getmessage($sender_id, $receiver_id){
+        $messages = Messages::where(function ($query) use ($sender_id, $receiver_id) {
+            $query->where('sender_id', $sender_id)
+                  ->where('receiver_id', $receiver_id);
+        })->orWhere(function ($query) use ($sender_id, $receiver_id) {
+            $query->where('sender_id', $receiver_id)
+                  ->where('receiver_id', $sender_id);
+        })->get();
+        
         return response()->json([
-            "message" =>  $message
+            "messages" =>  $messages
         ]);
     }
-    function getblocks(Request $request, $id){
+    function getblocks($id){
         $block = blocks::find($id);
         return response()->json([
             "block" =>  $block
         ]);
     }
-    function getfavorites(Request $request, $id){
+    function getfavorites($id){
         $favorite = favorites::find($id);
         return response()->json([
             "favorite" =>  $favorite
