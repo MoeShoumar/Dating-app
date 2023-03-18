@@ -35,6 +35,7 @@ class JWTController extends Controller
             'location' => 'required|string|min:2|max:100',
             'gender' => 'required',
             'bio' => 'required|string|min:2|max:1000',
+            'profile_picture'=>'nullable|text'
         ]);
 
         if($validator->fails()) {
@@ -82,6 +83,9 @@ class JWTController extends Controller
 
         return $this->respondWithToken($token);
     }
+    
+
+
 
     /**
      * Logout user

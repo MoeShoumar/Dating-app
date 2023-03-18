@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\messages;
 use App\Models\favorites;
@@ -39,7 +40,7 @@ class UserController extends Controller
         ]);
     }
     function getblocks($sender_id, $receiver_id){
-        $block = blocks::where('sender_id', $sender_id)->where('receiver_id', $receiver_id)->get() ;
+        $block = blocks::where('sender_id', $sender_id)->where('receiver_id', $receiver_id)->get();
         return response()->json([
             "block" =>  $block
         ]);
@@ -51,6 +52,21 @@ class UserController extends Controller
        return response()->json(['favorites'=> $favorites]);
     }
 
+    public function editprofile(Request $request)
+    {
+        $user = User::find($request->id);
+
+        $user->update([
+            "name" =>$request->name,
+            "email" => $request->email,
+            "age" => $request->age,
+            "location"=>$request->location,
+            "bio"=>$request->bio
+        ]);
+
+        return response()->json(['message' => 'User profile updated successfully', 'user' => $user]);
+    }
+    
 }
 
 

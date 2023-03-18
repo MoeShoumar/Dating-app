@@ -52,6 +52,39 @@ class ActionController extends Controller
     return response()->json(['message'=>'user blocked']);
   }
 
-}
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
 
 
