@@ -31,39 +31,25 @@ dating_pages.loadFor = (page) => {
 };
 
 // sign-in
-// dating_pages.load_signin = async () => {
-//   const form = document.getElementById("login-form");
-//   form.addEventListener("submit", async (event) => {
-//     event.preventDefault();
-//     const email = document.getElementById("email").value;
-//     const password = document.getElementById("password").value;
-//     const data = { email: email, password: password };
-//     const signin_url = dating_pages.base_url + "signin.php";
-//     const response = await dating_pages.postAPI(signin_url, data);
-//     console.log(response.data);
-//     if (response.data.status !== "null" && response.data.user_type == 3) {
-//       localStorage.setItem("jwt", response.data.token);
-//       window.location.href = "adminpanel.html";
-//     } else if (
-//       response.data.status !== "null" &&
-//       response.data.user_type == 2
-//     ) {
-//       localStorage.setItem("jwt", response.data.token);
-//       console.log(localStorage.getItem("jwt"));
-//       window.location.href = "employee.html";
-//     } else if (
-//       response.data.status !== "null" &&
-//       response.data.user_type == 1
-//     ) {
-//       localStorage.setItem("jwt", response.data.token);
-//       window.location.href = "pateint.html";
-//     } else {
-//       const error_message = document.createElement("div");
-//       error_message.textContent = "Incorrect email or password.";
-//       form.appendChild(error_message);
-//     }
-//   });
-// };
+dating_pages.load_signin = async () => {
+  const form = document.getElementById("signin_form");
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const data = { email: email, password: password };
+    const signin_url = `${dating_pages.base_url}auth/login`;
+    const response = await dating_pages.postAPI(signin_url, data);
+    console.log(response.data);
+    if (response.data.status === "200") {
+      localStorage.setItem("jwt", response.data.token);
+      window.location.href = "users-list.html";
+    } else {
+      const error_message = document.getElementById("error_message");
+      error_message.style.display = "block";
+    }
+  });
+};
 
 // sign-up
 dating_pages.load_signup = async () => {
@@ -93,6 +79,6 @@ dating_pages.load_signup = async () => {
     const response_signup = await dating_pages.postAPI(signup_url, signup_data);
     console.log(response_signup.data);
     window.location.href = "signin.html";
-    localStorage.setItem("jwt", response_signup.data.token);
+    // localStorage.setItem("jwt", response_signup.data.token);
   });
 };
