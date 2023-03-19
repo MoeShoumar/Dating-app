@@ -18,6 +18,7 @@ Route::group(['middleware' => 'api'], function($router) {
         });
         
         Route::group(['prefix' => 'user'], function () {
+            Route::post("/upload",[UserController::class,"uploadImage"]);
             Route::get('/user/{id}', [UserController::class, "getuser"]);
             Route::get('/users', [UserController::class, "getusers"]);
             Route::post('/editprofile', [UserController::class, "editprofile"]);

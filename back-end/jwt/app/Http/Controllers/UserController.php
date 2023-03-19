@@ -69,7 +69,19 @@ class UserController extends Controller
 
         return response()->json(['message' => 'User profile updated successfully', 'user' => $user]);
     }
-    
+    // upload image
+    function uploadImage(Request $request){
+        $encoded = $request->encoded;
+        $name = $request->name;
+
+        $decoded = base64_decode($encoded);
+
+        $file_path = public_path('images/'. $name . '.png');
+
+        file_put_contents($file_path,$decoded);
+
+        User::where("name",$name)->update("pic", "http://localhost/images" . $name . ".png");
+    }
 }
 
 
