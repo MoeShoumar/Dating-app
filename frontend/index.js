@@ -1,11 +1,11 @@
 const dating_pages = {};
-dating_pages.base_url = "http://127.0.0.1:8000/api/v0.0.1/";
+dating_pages.base_url = "http://localhost:8000/api/v0.0.1/";
 
 dating_pages.getAPI = async (api_url, api_token = null) => {
   try {
     const headers = {};
     if (api_token) {
-      headers.Authorization = "Bearer ${api_token}";
+      headers.Authorization = `Bearer ${api_token}`;
     }
     const response = await axios.get(api_url, { headers });
     return response.data;
@@ -54,31 +54,47 @@ dating_pages.load_signin = async () => {
 // sign-up
 dating_pages.load_signup = async () => {
   const form_signup = document.getElementById("signup-form");
+  const image_input = document.getElementById("profile_pic");
+  const reader = new FileReader();
+  let encoded;
+  image_input.addEventListener("change", (event) => {
+    let file = image_input.files[0];
+
+    reader.readAsDataURL(file);
+
+    reader.addEventListener("load", () => {
+      console.log(reader.result);
+      encoded = reader.result;
+    });
+  });
+
   form_signup.addEventListener("submit", async (event) => {
     event.preventDefault();
+
     const name = document.getElementById("name").value;
     const password = document.getElementById("password").value;
     const location = document.getElementById("location").value;
     const bio = document.getElementById("bio").value;
-    const profile_pic = document.getElementById("profile_pic").value;
     const email = document.getElementById("email").value;
-    const gender = document.querySelector('input[name="gender"]');
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    console.log(gender);
     const age = document.getElementById("age").value;
-
-    const signup_data = {
-      email: email,
-      password: password,
-      age: age,
-      gender: gender,
-      name: name,
-      location: location,
-      bio: bio,
-    };
-    console.log(signup_data);
+    const body = new FormData();
+    body.append("encoded", encoded.split(",")[1]);
+    body.append("name", name);
+    body.append("password", password);
+    body.append("location", location);
+    body.append("bio", bio);
+    body.append("profile_pic", profile_pic);
+    body.append("email", email);
+    body.append("gender", gender);
+    body.append("age", age);
     const signup_url = `${dating_pages.base_url}auth/register`;
-    const response_signup = await dating_pages.postAPI(signup_url, signup_data);
+    const response_signup = await dating_pages.postAPI(signup_url, body);
+    console.log(body);
+    console.log(signup_url);
     console.log(response_signup.data);
-    window.location.href = "signin.html";
+    // window.location.href = "signin.html";
     // localStorage.setItem("jwt", response_signup.data.token);
   });
 };
