@@ -64,6 +64,8 @@ dating_pages.load_signup = async () => {
     const email = document.getElementById("email").value;
     const gender = document.querySelector('input[name="gender"]:checked').value;
     const age = document.getElementById("age").value;
+    // const profile_pic = document.getElementById("profile_pic").value;
+
     const body = new FormData();
     body.append("name", name);
     body.append("password", password);
@@ -72,33 +74,69 @@ dating_pages.load_signup = async () => {
     body.append("email", email);
     body.append("gender", gender);
     body.append("age", age);
+    // body.append("profile_picture", profile_pic);
     const signup_url = `${dating_pages.base_url}auth/register`;
     const response_signup = await dating_pages.postAPI(signup_url, body);
-    window.location.href = "profileupload.html";
+    // localStorage.setItem("id", response_signup.data.id);
+    // window.location.href = "profileupload.html";
     console.log(response_signup);
     // localStorage.setItem("jwt", response_signup.data.token);
   });
 };
-
+// upload images
 dating_pages.load_profile = async () => {
-  const image_input = document.getElementById("profile_pic");
-  const upload_btn = document.getElementById("upload_btn");
-  const reader = new FileReader();
-  let encoded;
-  image_input.addEventListener("change", (event) => {
-    let file = image_input.files[0];
+  const mainPic = document.getElementById("profile_main");
+  const optionalCards = document.querySelectorAll(".optional .card");
 
-    reader.readAsDataURL(file);
+  mainPic.addEventListener("click", () => {
+    const imageInput = document.createElement("input");
+    imageInput.type = "file";
+    imageInput.accept = "image/*";
 
-    reader.addEventListener("load", () => {
-      console.log(reader.result);
-      encoded = reader.result;
+    const reader = new FileReader();
+    let encoded;
+    imageInput.addEventListener("change", (event) => {
+      reader.readAsDataURL(event.target.files[0]);
+      reader.addEventListener("load", () => {
+        mainPic.querySelector("img").src = reader.result;
+        encoded = reader.result;
+      });
+    });
+    imageInput.click();
+  });
+
+  optionalCards.forEach((card) => {
+    optionalCards.addEventListener("click", () => {
+      const imageInput = document.createElement("input");
+      imageInput.type = "file";
+      imageInput.accept = "image/*";
+      imageInput.addEventListener("change", (event) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = () => {
+          card.querySelector("img").src = reader.result;
+        };
+      });
+      imageInput.click();
+    });
+
+    upload_btn.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const body = new FormData();
+      body.append("encoded", encoded.split(",")[1]);
     });
   });
 
-  upload_btn.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const body = new FormData();
-    body.append("encoded", encoded.split(",")[1]);
-  });
+  // const reader = new FileReader();
+  //
+  // image_input.addEventListener("change", (event) => {
+  //
+
+  //
+
+  //
+  //     console.log(reader.result);
+  //     encoded = reader.result;
+  //   });
+  // });
 };
