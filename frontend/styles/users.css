@@ -89,9 +89,9 @@ nav {
   border-radius: 5px;
   color: rgba(0, 0, 0, 0.6);
   background-color: rgba(205, 205, 205, 0.4);
-  background-image: url("/frontend/assets/search-icon.png");
+  /* background-image: url("/frontend/assets/search-icon.png");
   background-repeat: no-repeat;
-  background-position: 0.5rem;
+  background-position: 0.5rem; */
   padding-left: 2.6rem;
   transition: all 0.3s;
 }

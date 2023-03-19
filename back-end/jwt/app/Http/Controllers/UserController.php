@@ -17,14 +17,14 @@ class UserController extends Controller
     function getusers(){
         $users = User::all();
         return response()->json([
-            "articles" => $users
+            "users" => $users
         ]);
     }
     // get user
     function getuser($id){
         $user = user::find($id);
         return response()->json([
-            "articles" => $user
+            "user" => $user
         ]);
     }
     // display sent and received messages
