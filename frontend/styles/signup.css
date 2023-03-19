@@ -135,6 +135,10 @@ button[type="submit"]:hover {
 
   font-weight: bold;
 }
+.signin_link {
+  display: flex;
+  align-items: center;
+}
 @media (max-width: 700px) {
   .container {
     max-width: 65vw;
