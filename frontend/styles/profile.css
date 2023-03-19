@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.profile_main {
+  height: 50vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  border: 7px dotted #828080;
+  padding: 20px;
+  width: 25vw;
+  height: 35vh;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.optional {
+  display: flex;
+  justify-content: space-evenly;
+}
