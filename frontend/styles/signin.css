@@ -31,6 +31,9 @@ label {
   margin-bottom: 5px;
   font-weight: bold;
 }
+.forgot_password {
+  display: none;
+}
 
 input[type="email"],
 input[type="password"],
@@ -52,6 +55,9 @@ button[type="submit"] {
   background-color: #ff4d4d;
   color: #fff;
 }
+/* .error_message {
+  display: none;
+} */
 .hidden {
   display: none;
 }

@@ -21,11 +21,10 @@
           <a href="#" id="forgot-password-link">Forgot Password?</a>
         </div>
         <button type="submit">Sign In</button>
-        <div id="error_message" class="hidden">
-          Invalid email or password. Please try again.
-        </div>
+        <div id="error_message" class="error_message"></div>
       </form>
-      <div id="forgot-password-form" class="hidden">
+
+      <div class="forgot_password" id="forgot_password_form">
         <p>Enter your name and email to recover your password:</p>
         <form id="forgot-password-email-form">
           <div class="form-group">
@@ -43,10 +42,11 @@
           </div>
           <button type="submit">Submit</button>
         </form>
-        <div id="forgot-password-error" class="hidden">
+
+        <div id="forgot-password-error" class="hidden reset_fail">
           Invalid name or email. Please try again.
         </div>
-        <div id="forgot-password-success" class="hidden">
+        <div id="forgot-password-success" class="hidden reset_success">
           Your password has been sent to your email.
         </div>
       </div>

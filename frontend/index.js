@@ -33,6 +33,14 @@ dating_pages.loadFor = (page) => {
 // sign-in
 dating_pages.load_signin = async () => {
   const form = document.getElementById("signin_form");
+  const forgot_password = document.getElementById("forgot-password-link");
+  const forgot_password_form = document.getElementById("forgot_password_form");
+  forgot_password.addEventListener("click", async (e) => {
+    e.preventDefault();
+    form.style.display = "none";
+    forgot_password_form.style.display = "block";
+    // add the reset password conditions
+  });
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const email = document.getElementById("email").value;
@@ -41,12 +49,13 @@ dating_pages.load_signin = async () => {
     const signin_url = `${dating_pages.base_url}auth/login`;
     const response = await dating_pages.postAPI(signin_url, data);
     console.log(response.data);
-    if (response.data.status === "200") {
-      localStorage.setItem("jwt", response.data.token);
+    console.log(response.status);
+    if (response.status == "200") {
+      localStorage.setItem("jwt", response.data);
       window.location.href = "users-list.html";
     } else {
       const error_message = document.getElementById("error_message");
-      error_message.style.display = "block";
+      error_message.innerText = `${response.data.error}`;
     }
   });
 };
@@ -98,12 +107,10 @@ dating_pages.load_signup = async () => {
 dating_pages.load_profile = async () => {
   const mainPic = document.getElementById("profile_main");
   const optionalCards = document.querySelectorAll(".optional .card");
-
   mainPic.addEventListener("click", () => {
     const imageInput = document.createElement("input");
     imageInput.type = "file";
     imageInput.accept = "image/*";
-
     const reader = new FileReader();
     let encoded;
     imageInput.addEventListener("change", (event) => {
