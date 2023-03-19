@@ -26,38 +26,52 @@ class JWTController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|min:2|max:100',
-            'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|min:6',
-            'age' => 'required|integer|min:2|max:120',
-            'location' => 'required|string|min:2|max:100',
-            'gender' => 'required',
-            'bio' => 'required|string|min:2|max:1000',
-        ]);
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|min:2|max:100',
+        'email' => 'required|string|email|max:100|unique:users',
+        'password' => 'required|string|min:6',
+        'age' => 'required|integer|min:2|max:120',
+        'location' => 'required|string|min:2|max:100',
+        'gender' => 'required|integer',
+        'bio' => 'required|string|min:2|max:1000',
+        'pic' => 'required|string'
+    ]);
 
-        if($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                "location" => $request->location,
-                "age" => $request->age,
-                "gender" => $request->gender,
-                "bio" => $request->bio,
-
-                
-            ]);
-
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 400);
     }
+
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'location' => $request->location,
+        'age' => $request->age,
+        'gender' => $request->gender,
+        'bio' => $request->bio,
+    ]);
+
+    if ($request->pic) {
+        $encoded = $request->pic;
+        $id = $user->id;
+
+        $decoded = base64_decode($encoded);
+
+        $file_path = public_path('images/' . $id . '.png');
+
+        file_put_contents($file_path, $decoded);
+
+        $user->pic = 'http://localhost/images/' . $id . '.png';
+        $user->save();
+    }
+
+    return response()->json([
+        'message' => 'User successfully registered',
+        'user' => $user
+    ], 201);
+}
+
 
     /**
      * login user
