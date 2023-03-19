@@ -52,7 +52,7 @@ dating_pages.load_signin = async () => {
     console.log(response.status);
     if (response.status == "200") {
       localStorage.setItem("jwt", response.data.access_token);
-      window.location.href = "users-list.html";
+      window.location.href = "users_list.html";
     } else {
       const error_message = document.getElementById("error_message");
       error_message.innerText = `${response.data.error}`;
@@ -105,42 +105,48 @@ dating_pages.load_signup = async () => {
 };
 
 // userupload
-dating_pages.load_users_list = async () => {
-  let api_token = localStorage.getItem("jwt", response.data.access_token);
+dating_pages.load_userslist = async () => {
   const search = document.getElementById("search");
   const accountButton = document.getElementById("accountButton");
   const ageSelect = document.getElementById("age").value;
   const locationSelect = document.getElementById("location").value;
 
-  const user_card = document.getElementById("user_card");
   const like_btn = document.getElementById("like_btn");
-  like_btn.addEventListener("click", async () => {
-    // like user
-  });
-  const block_btn = document.getElementById("block_btn");
-  block_btn.addEventListener("click", async () => {
-    // like user
-  });
-  const message_btn = document.getElementById("message_btn");
-  message_btn.addEventListener("click", async () => {
-    // like user
-  });
+  // like_btn.addEventListener("click", async () => {
+  //   // like user
+  // });
+  // const block_btn = document.getElementById("block_btn");
+  // block_btn.addEventListener("click", async () => {
+  //   // like user
+  // });
+  // const message_btn = document.getElementById("message_btn");
+  // message_btn.addEventListener("click", async () => {
+  //   // like user
+  // });
   const chats_container = document.getElementById("chats_container");
   // get users
-  const users_url = `${dating_pages.base_url}auth/register`;
-  const services = document.getElementById("services");
-  const token2 = localStorage.getItem("jwt");
+  let api_token = localStorage.getItem("jwt");
+  const users_url = `${dating_pages.base_url}user/users`;
+  const cards_container = document.getElementById("cards_container");
+  const response = await dating_pages.getAPI(users_url, api_token);
+  console.log(response);
+  users_data = response.users;
+  // access users json objects
 
-  const response = await dating_pages.getAPI(users_url);
-  service_data = response_services.data;
-  console.log(service_data[0]);
-  for (let i = 0; i < service_data.length; i++) {
-    services.innerHTML += `<li>
-        <input type="checkbox" id="service_${service_data[i].id}" name="services[]" value="${service_data[i].id}" data-price="${service_data[i].service_price}">
-                <label for="service_${service_data[i].id}">
-                    ${service_data[i].service_name} ${service_data[i].service_price}\$
-                </label>
-        </li>`;
+  console.log(users_data);
+  for (let i = 0; i < users_data.length; i++) {
+    cards_container.innerHTML += `
+    <div class="user_card" id="user_card">
+    <img src="http://localhost:8000/images/${users_data[i].id}.png" alt="" id="image" />
+    <h2>${users_data[i].name}</h2>
+    <h3>Age:${users_data[i].age} </h3>
+    <h3>Location: ${users_data[i].location}</h3>
+    <div class="user_actions">
+      <button class="like_btn">Like</button>
+      <button class="block_btn">Block</button>
+      <button class="message_btn">Message</button>
+    </div>
+    </div>`;
   }
 };
 
