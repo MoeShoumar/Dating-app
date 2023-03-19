@@ -64,23 +64,34 @@ dating_pages.load_signup = async () => {
     const email = document.getElementById("email").value;
     const gender = document.querySelector('input[name="gender"]:checked').value;
     const age = document.getElementById("age").value;
-    // const profile_pic = document.getElementById("profile_pic").value;
+    const image_input = document.getElementById("profile_pic").files[0];
+    const reader = new FileReader();
 
-    const body = new FormData();
-    body.append("name", name);
-    body.append("password", password);
-    body.append("location", location);
-    body.append("bio", bio);
-    body.append("email", email);
-    body.append("gender", gender);
-    body.append("age", age);
-    // body.append("profile_picture", profile_pic);
-    const signup_url = `${dating_pages.base_url}auth/register`;
-    const response_signup = await dating_pages.postAPI(signup_url, body);
-    // localStorage.setItem("id", response_signup.data.id);
-    // window.location.href = "profileupload.html";
-    console.log(response_signup);
-    // localStorage.setItem("jwt", response_signup.data.token);
+    reader.readAsDataURL(image_input);
+
+    reader.addEventListener("load", async () => {
+      const encoded = reader.result.split(",")[1];
+
+      const body = new FormData();
+      body.append("name", name);
+      body.append("password", password);
+      body.append("location", location);
+      body.append("bio", bio);
+      body.append("email", email);
+      body.append("gender", gender);
+      body.append("age", age);
+      body.append("pic", encoded);
+
+      const signup_url = `${dating_pages.base_url}auth/register`;
+      const response_signup = await dating_pages.postAPI(signup_url, body);
+
+      localStorage.setItem("id", response_signup.data.user.id);
+
+      if ((response_signup.status = 201)) {
+        window.location.href = "signin.html";
+        console.log(response_signup);
+      }
+    });
   });
 };
 // upload images
@@ -126,17 +137,5 @@ dating_pages.load_profile = async () => {
       body.append("encoded", encoded.split(",")[1]);
     });
   });
-
-  // const reader = new FileReader();
-  //
-  // image_input.addEventListener("change", (event) => {
-  //
-
-  //
-
-  //
-  //     console.log(reader.result);
-  //     encoded = reader.result;
-  //   });
-  // });
 };
+// localStorage.setItem("jwt", response_signup.data.token);
