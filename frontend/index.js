@@ -103,6 +103,47 @@ dating_pages.load_signup = async () => {
     });
   });
 };
+
+// userupload
+dating_pages.load_users_list = async () => {
+  let api_token = localStorage.getItem("jwt", response.data.access_token);
+  const search = document.getElementById("search");
+  const accountButton = document.getElementById("accountButton");
+  const ageSelect = document.getElementById("age").value;
+  const locationSelect = document.getElementById("location").value;
+
+  const user_card = document.getElementById("user_card");
+  const like_btn = document.getElementById("like_btn");
+  like_btn.addEventListener("click", async () => {
+    // like user
+  });
+  const block_btn = document.getElementById("block_btn");
+  block_btn.addEventListener("click", async () => {
+    // like user
+  });
+  const message_btn = document.getElementById("message_btn");
+  message_btn.addEventListener("click", async () => {
+    // like user
+  });
+  const chats_container = document.getElementById("chats_container");
+  // get users
+  const users_url = `${dating_pages.base_url}auth/register`;
+  const services = document.getElementById("services");
+  const token2 = localStorage.getItem("jwt");
+
+  const response = await dating_pages.getAPI(users_url);
+  service_data = response_services.data;
+  console.log(service_data[0]);
+  for (let i = 0; i < service_data.length; i++) {
+    services.innerHTML += `<li>
+        <input type="checkbox" id="service_${service_data[i].id}" name="services[]" value="${service_data[i].id}" data-price="${service_data[i].service_price}">
+                <label for="service_${service_data[i].id}">
+                    ${service_data[i].service_name} ${service_data[i].service_price}\$
+                </label>
+        </li>`;
+  }
+};
+
 // upload images
 // dating_pages.load_profile = async () => {
 //   const mainPic = document.getElementById("profile_main");
@@ -145,10 +186,4 @@ dating_pages.load_signup = async () => {
 //     });
 //   });
 // };
-
-// userupload
-dating_pages.load_users_list = async () => {
-  console.log(hello);
-};
-
-// localStorage.setItem("jwt", response_signup.data.token);
+``;
