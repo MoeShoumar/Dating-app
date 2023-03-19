@@ -14,6 +14,26 @@
         <div class="form-group">
           <label for="name">Name:</label>
           <input type="text" name="name" id="name" required />
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required />
+          </div>
+          <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" name="location" id="location" required />
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio:</label>
+            <input type="text" name="bio" id="bio" required />
+          </div>
+          <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" name="age" id="age" required />
+          </div>
           <label for="gender">Gender:</label>
           <div class="gender-buttons">
             <label class="btn btn-primary active">
@@ -39,27 +59,7 @@
             </label>
           </div>
         </div>
-        <div class="form-group">
-          <label for="age">Age:</label>
-          <input type="number" name="age" id="age" required />
-        </div>
-        <div class="form-group"></div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" name="email" id="email" required />
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" name="password" id="password" required />
-        </div>
-        <div class="form-group">
-          <label for="location">Location:</label>
-          <input type="text" name="location" id="location" required />
-        </div>
-        <div class="form-group">
-          <label for="bio">Bio:</label>
-          <input type="text" name="bio" id="bio" required />
-        </div>
+
         <div class="form-group">
           <label for="profile-pic">Upload Picture:</label>
           <input
@@ -72,6 +72,10 @@
         </div>
         <button type="submit">Sign Up</button>
       </form>
+      <div class="signin_link" id="signin_link">
+        <p>Already have an account?</p>
+        <a href="signin.html">Login</a>
+      </div>
     </div>
     <script src="axios.min.js"></script>
     <script src="index.js"></script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="./styles/users.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <nav>
+        <div class="logo">
+          <img src="assets/logo.png" alt="Logo" />
+        </div>
+        <div class="search-container">
+          <div class="input-container">
+            <input
+              class="search"
+              id="search"
+              type="text"
+              placeholder="Search"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="search-results-container">
+          <div id="search-results" class="search-results"></div>
+        </div>
+        <div class="menu">
+          <ul>
+            <li><a href="users_list.html">Home</a></li>
+            <li><a href="favotites.html">Liked</a></li>
+            <li><a href="">Blocked</a></li>
+            <li><a href="#">Chat</a></li>
+            <li class="profile"><a href="#">Profile</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="main_container">
+      <div class="cards_container" id="cards_container"></div>
+      <div class="filter_container"></div>
+      <div class="chats_container"></div>
+    </div>
+
+    <script src="axios.min.js"></script>
+    <script src="index.js"></script>
+    <script>
+      dating_pages.loadFor("users_list");
+    </script>
+  </body>
+</html>
