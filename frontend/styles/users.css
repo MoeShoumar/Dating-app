@@ -8,7 +8,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f99b9b;
+  background-color: #ffd0d0;
   padding: 10px 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   top: 0;
@@ -27,11 +27,41 @@ nav {
   display: flex;
   align-items: center;
 }
-
-.menu li {
-  margin-left: 20px;
+.account_button {
+  width: 130px;
+  height: 40px;
+  background: #f99b9b;
+  border-radius: 100px;
+  color: white;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  transition: 300ms all;
+  user-select: none;
+}
+.account_button:hover {
+  background: #de4040;
 }
 
+.account_button:active {
+  transform: scale(0.95);
+  transition: transform 200ms;
+}
+.menu li {
+  margin-left: 20px;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.menu li:hover {
+  background-color: #f99b9b;
+  color: #fff;
+}
 .menu li:first-child {
   margin-left: 0;
 }
