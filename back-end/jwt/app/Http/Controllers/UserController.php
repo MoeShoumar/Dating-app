@@ -13,7 +13,7 @@ use App\Models\added_pics;
 
 class UserController extends Controller
 {   
-    // get all users
+    // get opposite gender
     function getoppgender($id){
         $user = User::find($id);
         if($user->gender == "1"){

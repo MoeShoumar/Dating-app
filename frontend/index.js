@@ -1,7 +1,7 @@
 const dating_pages = {};
 dating_pages.base_url = "http://localhost:8000/api/v0.0.1/";
 
-dating_pages.getAPI = async (api_url, api_token = null) => {
+dating_pages.getAPI = async (api_url, id, api_token = null) => {
   try {
     const headers = {};
     if (api_token) {
@@ -126,9 +126,11 @@ dating_pages.load_userslist = async () => {
   const chats_container = document.getElementById("chats_container");
   // get users
   let api_token = localStorage.getItem("jwt");
-  const users_url = `${dating_pages.base_url}user/oppgender`;
+  let id = localStorage.getItem("id");
+  console.log(id);
+  const users_url = `${dating_pages.base_url}user/oppgender/${id}`;
   const cards_container = document.getElementById("cards_container");
-  const response = await dating_pages.getAPI(users_url, api_token);
+  const response = await dating_pages.getAPI(users_url, id, api_token);
   console.log(response);
   let users_data = response.users;
   console.log(users_data);
