@@ -93,10 +93,18 @@ class JWTController extends Controller
         if (!$token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-        return $this->respondWithToken($token);
+        $user_id = auth()->user()->id;
+        return $this->respondWithTokenAndId($token, $user_id);
     }
-    
+
+    private function respondWithTokenAndId($token, $user_id)
+{
+    return response()->json([
+        'access_token' => $token,
+        'token_type' => 'bearer',
+        'user_id' => $user_id,
+    ]);
+}
 
 
 
