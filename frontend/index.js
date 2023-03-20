@@ -110,7 +110,6 @@ dating_pages.load_signup = async () => {
 dating_pages.load_userslist = async () => {
   const accountButton = document.getElementById("accountButton");
 
-  const chats_container = document.getElementById("chats_container");
   // get users
   let api_token = localStorage.getItem("jwt");
   let id = localStorage.getItem("id");
@@ -245,17 +244,58 @@ dating_pages.load_userslist = async () => {
       console.log(response);
     });
   });
-  // message
+  // Get messages
+  const chats_container = document.getElementById("chats_container");
   const message_btn = document.querySelectorAll(".message_btn");
   message_btn.forEach((message_btn) => {
     message_btn.addEventListener("click", async () => {
+      chats_container.classList.toggle("hide");
       const messgaeduser_id = message_btn.getAttribute("value");
-      const message_url = `${dating_pages.base_url}actions/sendmessage/${id}/${messgaeduser_id}`;
-      const response = await dating_pages.postAPI(message_url, api_token);
       console.log(response);
+      for (let i = 0; i < users_data.length; i++) {
+        chats_container.innerHTML += `
+        <h2 class="title" id="title">${users_data[messgaeduser_id].name}</h2>
+        <div class="chat_box">
+          <div class="sender">
+
+          </div>
+          <br />
+          <div class="receiver">
+           
+          </div>
+        </div>
+        <div class="send_message">
+          <button class="sumbit" type="submit">Send</button>
+          
+          <input class="message" type="text" name="message" id="message" />
+        </div>
+        `;
+        const id = document.getElementById("message").value;
+        const message_url = `${dating_pages.base_url}actions/sendmessage/${id}/${messgaeduser_id}`;
+        const response = await dating_pages.postAPI(message_url, api_token);
+      }
     });
   });
 };
+
+// chats_container.innerHTML += `
+// <div class="user_card  ${users_data[
+//   i
+// ].name.toLowerCase()}" id="user_card_${users_data[i].id}">
+// <img src="http://localhost:8000/images/${
+//   users_data[i].id
+// }.png" alt="" id="image" />
+// <h2>${users_data[i].name}</h2>
+// <h3>Age:${users_data[i].age} </h3>
+// <h3>Location: ${users_data[i].location}</h3>
+// <div class="user_actions">
+//   <button  value="${users_data[i].id}"  class="like_btn">Like</button>
+//   <button  value="${users_data[i].id}"  class="block_btn">Block</button>
+//   <button  value="${
+//     users_data[i].id
+//   }"  class="message_btn">Message</button>
+// </div>
+// </div>`;
 
 // upload images
 // dating_pages.load_profile = async () => {
