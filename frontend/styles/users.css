@@ -102,6 +102,7 @@ nav {
 .search-container {
   transform: translateX(-50%);
   margin-left: 10%;
+  display: flex;
 }
 .search:focus {
   color: rgba(0, 0, 0, 0.8);
@@ -111,12 +112,17 @@ nav {
   transition: all 0.3s ease-out;
   box-shadow: 5px 5px 10px rgba(69, 69, 69, 0.2);
 }
-
+.search-icon {
+  object-fit: cover;
+  size: 50%;
+}
 /* content styling */
 .main_content {
   display: flex;
 }
-
+.hide {
+  display: none;
+}
 .cards_container {
   width: 60%;
   height: 100%;
