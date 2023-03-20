@@ -108,10 +108,7 @@ dating_pages.load_signup = async () => {
 dating_pages.load_userslist = async () => {
   const search = document.getElementById("search");
   const accountButton = document.getElementById("accountButton");
-  const ageSelect = document.getElementById("age").value;
-  console.log(ageSelect);
-  const locationSelect = document.getElementById("location");
-  console.log(locationSelect);
+
   const like_btn = document.getElementById("like_btn");
   // like_btn.addEventListener("click", async () => {
   //   // like user
@@ -131,7 +128,7 @@ dating_pages.load_userslist = async () => {
   const cards_container = document.getElementById("cards_container");
   const response = await dating_pages.getAPI(users_url, api_token);
   console.log(response);
-  users_data = response.users;
+  let users_data = response.users;
   console.log(users_data);
   for (let i = 0; i < users_data.length; i++) {
     cards_container.innerHTML += `
@@ -147,31 +144,51 @@ dating_pages.load_userslist = async () => {
     </div>
     </div>`;
   }
-
   // filter users:
 
-  locationSelect.addEventListener("change", () => {
+  const ageSelect = document.getElementById("age");
+  const locationSelect = document.getElementById("location");
+  locationSelect.addEventListener("change", filterData);
+  ageSelect.addEventListener("change", filterData);
+
+  let filteredData = users_data;
+  function filterData() {
     const selectedLocation = locationSelect.value;
-    const filtered_location = users_data.filter(
-      (user) => user.location === selectedLocation
-    );
-    cards_container.innerHTML = "";
-    for (let i = 0; i < filtered_location.length; i++) {
-      cards_container.innerHTML += `
-      <div class="user_card" id="user_card">
-      <img src="http://localhost:8000/images/${filtered_location[i].id}.png" alt="" id="image" />
-      <h2>${filtered_location[i].name}</h2>
-      <h3>Age:${filtered_location[i].age} </h3>
-      <h3>Location: ${filtered_location[i].location}</h3>
-      <div class="user_actions">
-        <button class="like_btn">Like</button>
-        <button class="block_btn">Block</button>
-        <button class="message_btn">Message</button>
-      </div>
-      </div>`;
+    const selectedAge = ageSelect.value;
+    if (selectedLocation) {
+      filteredData = filteredData.filter(
+        (user) => user.location === selectedLocation
+      );
     }
-  });
-};
+
+    if (selectedAge) {
+      switch (selectedAge) {
+        case "18to22":
+          filteredData = filteredData.filter(
+            (user) => user.age >= 18 && user.age <= 22
+          );
+          break;
+        case "22to25":
+          filteredData = filteredData.filter(
+            (user) => user.age >= 22 && user.age <= 25
+          );
+          break;
+        case "25to36":
+          filteredData = filteredData.filter(
+            (user) => user.age >= 25 && user.age <= 36
+          );
+          break;
+        case "36to50":
+          filteredData = filteredData.filter(
+            (user) => user.age >= 36 && user.age <= 50
+          );
+          break;
+        case "over50":
+          filteredData = filteredData.filter((user) => user.age > 50);
+          break;
+      }
+    }
+
 
 // upload images
 // dating_pages.load_profile = async () => {
@@ -215,4 +232,3 @@ dating_pages.load_userslist = async () => {
 //     });
 //   });
 // };
-``;
