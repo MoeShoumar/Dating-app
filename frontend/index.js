@@ -110,14 +110,6 @@ dating_pages.load_signup = async () => {
 dating_pages.load_userslist = async () => {
   const accountButton = document.getElementById("accountButton");
 
-  // const block_btn = document.getElementById("block_btn");
-  // block_btn.addEventListener("click", async () => {
-  //   // like user
-  // });
-  // const message_btn = document.getElementById("message_btn");
-  // message_btn.addEventListener("click", async () => {
-  //   // like user
-  // });
   const chats_container = document.getElementById("chats_container");
   // get users
   let api_token = localStorage.getItem("jwt");
@@ -131,9 +123,9 @@ dating_pages.load_userslist = async () => {
   console.log(users_data);
   for (let i = 0; i < users_data.length; i++) {
     cards_container.innerHTML += `
-    <div class="user_card hide ${users_data[
-      i
-    ].name.toLowerCase()}" id="user_card_${users_data[i].id}">
+    <div class="user_card  ${users_data[i].name.toLowerCase()}" id="user_card_${
+      users_data[i].id
+    }">
     <img src="http://localhost:8000/images/${
       users_data[i].id
     }.png" alt="" id="image" />
@@ -204,13 +196,13 @@ dating_pages.load_userslist = async () => {
               <h3>Location: ${filteredData[i].location}</h3>
               <div class="user_actions">
                 <button  value="${
-                  users_data[i].id
+                  filteredData[i].id
                 }" class="like_btn">Like</button>
                 <button  value="${
-                  users_data[i].id
+                  filteredData[i].id
                 }" class="block_btn">Block</button>
                 <button  value="${
-                  users_data[i].id
+                  filteredData[i].id
                 }" class="message_btn">Message</button>
               </div>
             </div>`;
@@ -227,7 +219,7 @@ dating_pages.load_userslist = async () => {
       const isVisible = user.name.toLowerCase().includes(value);
       for (let i = 0; i < user_cards.length; i++) {
         if (user_cards[i].classList.contains(user.name.toLowerCase())) {
-          user_cards[i].classList.remove("hide");
+          user_cards[i].classList.toggle("hide");
         }
       }
     });
@@ -247,9 +239,19 @@ dating_pages.load_userslist = async () => {
   const block_btn = document.querySelectorAll(".block_btn");
   block_btn.forEach((block_btn) => {
     block_btn.addEventListener("click", async () => {
-      const liked_user = block_btn.getAttribute("value");
-      const block = `${dating_pages.base_url}actions/blockuser/${id}/${liked_user}`;
-      const response = await dating_pages.postAPI(block, api_token);
+      const blockeduser_id = block_btn.getAttribute("value");
+      const block_url = `${dating_pages.base_url}actions/blockuser/${id}/${blockeduser_id}`;
+      const response = await dating_pages.postAPI(block_url, api_token);
+      console.log(response);
+    });
+  });
+  // message
+  const message_btn = document.querySelectorAll(".message_btn");
+  message_btn.forEach((message_btn) => {
+    message_btn.addEventListener("click", async () => {
+      const messgaeduser_id = message_btn.getAttribute("value");
+      const message_url = `${dating_pages.base_url}actions/sendmessage/${id}/${messgaeduser_id}`;
+      const response = await dating_pages.postAPI(message_url, api_token);
       console.log(response);
     });
   });
