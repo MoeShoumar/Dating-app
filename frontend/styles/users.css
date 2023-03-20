@@ -121,7 +121,7 @@ nav {
   display: flex;
 }
 .hide {
-  display: none;
+  display: none !important;
 }
 .cards_container {
   width: 60%;
