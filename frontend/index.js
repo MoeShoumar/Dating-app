@@ -234,13 +234,24 @@ dating_pages.load_userslist = async () => {
   });
 
   // like
-  const like_btn = document.querySelector(".like_btn");
-  like_btn.addEventListener("click", async () => {
-    const liked_user = like_btn.getAttribute("value");
-    console.log("hello");
-    const like_url = `${dating_pages.base_url}actions/likeuser/${id}/${liked_user}`;
-    const response = await dating_pages.postAPI(like_url, api_token);
-    console.log(response);
+  const like_btn = document.querySelectorAll(".like_btn");
+  like_btn.forEach((like_btn) => {
+    like_btn.addEventListener("click", async () => {
+      const liked_user = like_btn.getAttribute("value");
+      const like_url = `${dating_pages.base_url}actions/likeuser/${id}/${liked_user}`;
+      const response = await dating_pages.postAPI(like_url, api_token);
+      console.log(response);
+    });
+  });
+  // block
+  const block_btn = document.querySelectorAll(".block_btn");
+  block_btn.forEach((block_btn) => {
+    block_btn.addEventListener("click", async () => {
+      const liked_user = block_btn.getAttribute("value");
+      const block = `${dating_pages.base_url}actions/blockuser/${id}/${liked_user}`;
+      const response = await dating_pages.postAPI(block, api_token);
+      console.log(response);
+    });
   });
 };
 
