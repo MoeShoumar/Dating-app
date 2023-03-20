@@ -141,9 +141,9 @@ dating_pages.load_userslist = async () => {
     <h3>Age:${users_data[i].age} </h3>
     <h3>Location: ${users_data[i].location}</h3>
     <div class="user_actions">
-      <button class="like_btn">Like</button>
-      <button class="block_btn">Block</button>
-      <button class="message_btn">Message</button>
+      <button  value="${users_data[i].id}"  class="like_btn">Like</button>
+      <button  value="${users_data[i].id}"  class="block_btn">Block</button>
+      <button  value="${users_data[i].id}"  class="message_btn">Message</button>
     </div>
     </div>`;
   }
@@ -195,7 +195,7 @@ dating_pages.load_userslist = async () => {
       cards_container.innerHTML += `
             <div class="user_card ${users_data[
               i
-            ].name.toLowerCase()}" id="user_card">
+            ].name.toLowerCase()}" id="user_card_${users_data[i].id}">
               <img src="http://localhost:8000/images/${
                 filteredData[i].id
               }.png" alt="" id="image" />
@@ -203,9 +203,15 @@ dating_pages.load_userslist = async () => {
               <h3>Age:${filteredData[i].age} </h3>
               <h3>Location: ${filteredData[i].location}</h3>
               <div class="user_actions">
-                <button class="like_btn">Like</button>
-                <button class="block_btn">Block</button>
-                <button class="message_btn">Message</button>
+                <button  value="${
+                  users_data[i].id
+                }" class="like_btn">Like</button>
+                <button  value="${
+                  users_data[i].id
+                }" class="block_btn">Block</button>
+                <button  value="${
+                  users_data[i].id
+                }" class="message_btn">Message</button>
               </div>
             </div>`;
     }
@@ -226,16 +232,17 @@ dating_pages.load_userslist = async () => {
       }
     });
   });
-};
 
-// like
-const like_btn = document.getElementById("like_btn");
-const liked_user = like_btn.addEventListener("click", async () => {
-  const like_url = `${dating_pages.base_url}actions/likeuser/${id}/${liked_user}`;
-  const response = await dating_pages.getAPI(users_url, id, api_token);
-  console.log(response);
-  let users_data = response.users;
-});
+  // like
+  const like_btn = document.querySelector(".like_btn");
+  like_btn.addEventListener("click", async () => {
+    const liked_user = like_btn.getAttribute("value");
+    console.log("hello");
+    const like_url = `${dating_pages.base_url}actions/likeuser/${id}/${liked_user}`;
+    const response = await dating_pages.postAPI(like_url, api_token);
+    console.log(response);
+  });
+};
 
 // upload images
 // dating_pages.load_profile = async () => {
