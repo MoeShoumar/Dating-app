@@ -51,8 +51,10 @@ dating_pages.load_signin = async () => {
     console.log(response.data.access_token);
     console.log(response.status);
     if (response.status == "200") {
+      console.log(response);
       localStorage.setItem("jwt", response.data.access_token);
       window.location.href = "users_list.html";
+      localStorage.setItem("id", response.data.user_id);
     } else {
       const error_message = document.getElementById("error_message");
       error_message.innerText = `${response.data.error}`;
@@ -94,7 +96,7 @@ dating_pages.load_signup = async () => {
       const signup_url = `${dating_pages.base_url}auth/register`;
       const response_signup = await dating_pages.postAPI(signup_url, body);
 
-      localStorage.setItem("id", response_signup.data.user.id);
+      localStorage.setItem("id", response_signup.user.id);
 
       if ((response_signup.status = 201)) {
         window.location.href = "signin.html";
@@ -124,7 +126,7 @@ dating_pages.load_userslist = async () => {
   const chats_container = document.getElementById("chats_container");
   // get users
   let api_token = localStorage.getItem("jwt");
-  const users_url = `${dating_pages.base_url}user/users`;
+  const users_url = `${dating_pages.base_url}user/oppgender`;
   const cards_container = document.getElementById("cards_container");
   const response = await dating_pages.getAPI(users_url, api_token);
   console.log(response);
@@ -206,6 +208,7 @@ dating_pages.load_userslist = async () => {
     }
   }
 };
+//
 
 // upload images
 // dating_pages.load_profile = async () => {
