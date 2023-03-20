@@ -189,6 +189,23 @@ dating_pages.load_userslist = async () => {
       }
     }
 
+    cards_container.innerHTML = "";
+    for (let i = 0; i < filteredData.length; i++) {
+      cards_container.innerHTML += `
+            <div class="user_card" id="user_card">
+              <img src="http://localhost:8000/images/${filteredData[i].id}.png" alt="" id="image" />
+              <h2>${filteredData[i].name}</h2>
+              <h3>Age:${filteredData[i].age} </h3>
+              <h3>Location: ${filteredData[i].location}</h3>
+              <div class="user_actions">
+                <button class="like_btn">Like</button>
+                <button class="block_btn">Block</button>
+                <button class="message_btn">Message</button>
+              </div>
+            </div>`;
+    }
+  }
+};
 
 // upload images
 // dating_pages.load_profile = async () => {
