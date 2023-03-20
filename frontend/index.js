@@ -107,6 +107,7 @@ dating_pages.load_signup = async () => {
 };
 
 // userupload
+
 dating_pages.load_userslist = async () => {
   const accountButton = document.getElementById("accountButton");
 
@@ -120,24 +121,8 @@ dating_pages.load_userslist = async () => {
   console.log(response);
   let users_data = response.users;
   console.log(users_data);
-  for (let i = 0; i < users_data.length; i++) {
-    cards_container.innerHTML += `
-    <div class="user_card  ${users_data[i].name.toLowerCase()}" id="user_card_${
-      users_data[i].id
-    }">
-    <img src="http://localhost:8000/images/${
-      users_data[i].id
-    }.png" alt="" id="image" />
-    <h2>${users_data[i].name}</h2>
-    <h3>Age:${users_data[i].age} </h3>
-    <h3>Location: ${users_data[i].location}</h3>
-    <div class="user_actions">
-      <button  value="${users_data[i].id}"  class="like_btn">Like</button>
-      <button  value="${users_data[i].id}"  class="block_btn">Block</button>
-      <button  value="${users_data[i].id}"  class="message_btn">Message</button>
-    </div>
-    </div>`;
-  }
+  usersLoader(users_data, cards_container);
+
   // filter users:
   const ageSelect = document.getElementById("age");
   const locationSelect = document.getElementById("location");
@@ -156,27 +141,27 @@ dating_pages.load_userslist = async () => {
     if (selectedAge) {
       switch (selectedAge) {
         case "18to22":
-          filteredData = filteredData.filter(
+          filteredData = users_data.filter(
             (user) => user.age >= 18 && user.age <= 22
           );
           break;
         case "22to25":
-          filteredData = filteredData.filter(
+          filteredData = users_data.filter(
             (user) => user.age >= 22 && user.age <= 25
           );
           break;
         case "25to36":
-          filteredData = filteredData.filter(
+          filteredData = users_data.filter(
             (user) => user.age >= 25 && user.age <= 36
           );
           break;
         case "36to50":
-          filteredData = filteredData.filter(
+          filteredData = users_data.filter(
             (user) => user.age >= 36 && user.age <= 50
           );
           break;
         case "over50":
-          filteredData = filteredData.filter((user) => user.age > 50);
+          filteredData = users_data.filter((user) => user.age > 50);
           break;
       }
     }
@@ -207,6 +192,7 @@ dating_pages.load_userslist = async () => {
             </div>`;
     }
   }
+
   // search
   const search = document.getElementById("search");
   const user_cards = document.querySelectorAll(".user_card");
@@ -214,14 +200,14 @@ dating_pages.load_userslist = async () => {
   search.addEventListener("input", (e) => {
     const value = e.target.value.toLowerCase();
     console.log(value);
-    users_data.forEach((user) => {
-      const isVisible = user.name.toLowerCase().includes(value);
-      for (let i = 0; i < user_cards.length; i++) {
-        if (user_cards[i].classList.contains(user.name.toLowerCase())) {
-          user_cards[i].classList.toggle("hide");
-        }
-      }
-    });
+
+    filteredData = users_data.filter((user) =>
+      user.name.toLowerCase().includes(value)
+    );
+
+    console.log(filteredData);
+
+    usersLoader(filteredData, cards_container);
   });
 
   // like
@@ -276,6 +262,7 @@ dating_pages.load_userslist = async () => {
       }
     });
   });
+  //
 };
 
 // chats_container.innerHTML += `
