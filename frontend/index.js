@@ -228,6 +228,15 @@ dating_pages.load_userslist = async () => {
   });
 };
 
+// like
+const like_btn = document.getElementById("like_btn");
+const liked_user = like_btn.addEventListener("click", async () => {
+  const like_url = `${dating_pages.base_url}actions/likeuser/${id}/${liked_user}`;
+  const response = await dating_pages.getAPI(users_url, id, api_token);
+  console.log(response);
+  let users_data = response.users;
+});
+
 // upload images
 // dating_pages.load_profile = async () => {
 //   const mainPic = document.getElementById("profile_main");
