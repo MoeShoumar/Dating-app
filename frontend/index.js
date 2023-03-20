@@ -108,13 +108,8 @@ dating_pages.load_signup = async () => {
 
 // userupload
 dating_pages.load_userslist = async () => {
-  const search = document.getElementById("search");
   const accountButton = document.getElementById("accountButton");
 
-  const like_btn = document.getElementById("like_btn");
-  // like_btn.addEventListener("click", async () => {
-  //   // like user
-  // });
   // const block_btn = document.getElementById("block_btn");
   // block_btn.addEventListener("click", async () => {
   //   // like user
@@ -136,8 +131,12 @@ dating_pages.load_userslist = async () => {
   console.log(users_data);
   for (let i = 0; i < users_data.length; i++) {
     cards_container.innerHTML += `
-    <div class="user_card" id="user_card">
-    <img src="http://localhost:8000/images/${users_data[i].id}.png" alt="" id="image" />
+    <div class="user_card hide ${users_data[
+      i
+    ].name.toLowerCase()}" id="user_card_${users_data[i].id}">
+    <img src="http://localhost:8000/images/${
+      users_data[i].id
+    }.png" alt="" id="image" />
     <h2>${users_data[i].name}</h2>
     <h3>Age:${users_data[i].age} </h3>
     <h3>Location: ${users_data[i].location}</h3>
@@ -149,12 +148,10 @@ dating_pages.load_userslist = async () => {
     </div>`;
   }
   // filter users:
-
   const ageSelect = document.getElementById("age");
   const locationSelect = document.getElementById("location");
   locationSelect.addEventListener("change", filterData);
   ageSelect.addEventListener("change", filterData);
-
   let filteredData = users_data;
   function filterData() {
     const selectedLocation = locationSelect.value;
@@ -196,8 +193,12 @@ dating_pages.load_userslist = async () => {
     cards_container.innerHTML = "";
     for (let i = 0; i < filteredData.length; i++) {
       cards_container.innerHTML += `
-            <div class="user_card" id="user_card">
-              <img src="http://localhost:8000/images/${filteredData[i].id}.png" alt="" id="image" />
+            <div class="user_card ${users_data[
+              i
+            ].name.toLowerCase()}" id="user_card">
+              <img src="http://localhost:8000/images/${
+                filteredData[i].id
+              }.png" alt="" id="image" />
               <h2>${filteredData[i].name}</h2>
               <h3>Age:${filteredData[i].age} </h3>
               <h3>Location: ${filteredData[i].location}</h3>
@@ -209,8 +210,23 @@ dating_pages.load_userslist = async () => {
             </div>`;
     }
   }
+  // search
+  const search = document.getElementById("search");
+  const user_cards = document.querySelectorAll(".user_card");
+  console.log(user_cards);
+  search.addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase();
+    console.log(value);
+    users_data.forEach((user) => {
+      const isVisible = user.name.toLowerCase().includes(value);
+      for (let i = 0; i < user_cards.length; i++) {
+        if (user_cards[i].classList.contains(user.name.toLowerCase())) {
+          user_cards[i].classList.remove("hide");
+        }
+      }
+    });
+  });
 };
-//
 
 // upload images
 // dating_pages.load_profile = async () => {
