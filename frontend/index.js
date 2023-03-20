@@ -107,7 +107,27 @@ dating_pages.load_signup = async () => {
 };
 
 // userupload
-
+const usersLoader = (users, wrapper) => {
+  wrapper.innerHTML = "";
+  for (let i = 0; i < users.length; i++) {
+    wrapper.innerHTML += `
+    <div class="user_card" id="user_card" data-value="${users[
+      i
+    ].name.toLowerCase()}">
+    <img src="http://localhost:8000/images/${
+      users[i].id
+    }.png" alt="" id="image" />
+    <h2>${users[i].name}</h2>
+    <h3>Age:${users[i].age} </h3>
+    <h3>Location: ${users[i].location}</h3>
+    <div class="user_actions">
+      <button  value="${users[i].id}"  class="like_btn">Like</button>
+      <button  value="${users[i].id}"  class="block_btn">Block</button>
+      <button  value="${users[i].id}"  class="message_btn">Message</button>
+    </div>
+    </div>`;
+  }
+};
 dating_pages.load_userslist = async () => {
   const accountButton = document.getElementById("accountButton");
 
