@@ -14,8 +14,14 @@ use App\Models\added_pics;
 class UserController extends Controller
 {   
     // get all users
-    function getusers(){
-        $users = User::all();
+    function getoppgender($id){
+        $user = User::find($id);
+        if($user->gender == "1"){
+            $oppositegender = "0";
+        }else{
+             $oppositegender = "1";
+        }
+        $users = User::where('gender',$oppositegender)->get();
         return response()->json([
             "users" => $users
         ]);
