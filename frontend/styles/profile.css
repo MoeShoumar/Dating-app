@@ -95,9 +95,12 @@ h1 {
   display: flex;
   flex-direction: column;
 }
-.extraPics > img {
-  object-fit: cover;
+.image_card img {
+  max-width: 80%;
+  max-height: 80%;
+  margin-left: 20px;
 }
+
 img:hover {
   transform: skew(1.15);
   transition: transform 0.5s ease-in-out;
