@@ -228,6 +228,12 @@ dating_pages.load_userslist = async () => {
 
     usersLoader(filteredData, cards_container);
   });
+  // logout
+  const logout = document.getElementById("logout");
+  logout.addEventListener("click", async () => {
+    localStorage.clear();
+    window.location.href = "signin.html";
+  });
 
   // like
   const like_btn = document.querySelectorAll(".like_btn");
@@ -306,7 +312,7 @@ dating_pages.load_profile = async () => {
   });
   const logout = document.getElementById("logout");
   logout.addEventListener("click", async () => {
-    sessionStorage.clear();
+    localStorage.clear();
     window.location.href = "signin.html";
   });
 };
