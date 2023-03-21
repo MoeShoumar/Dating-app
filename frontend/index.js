@@ -290,6 +290,7 @@ dating_pages.load_userslist = async () => {
 };
 
 dating_pages.load_profile = async () => {
+  // uplaod images
   const image_input1 = document.getElementById("profile_pic1");
   const image_input2 = document.getElementById("profile_pic2");
   const image_input3 = document.getElementById("profile_pic3");
@@ -346,6 +347,24 @@ dating_pages.load_profile = async () => {
     localStorage.clear();
     window.location.href = "signin.html";
   });
+  // update info
+  const edit_btn = document.getElementById("edit_btn");
+  const name = document.getElementById("name").value;
+  const location = document.getElementById("location").value;
+  const bio = document.getElementById("bio").value;
+  const age = document.getElementById("age").value;
+  edit_btn.addEventListener("click", async () => {
+    const updateurl = `${dating_pages.base_url}user/editprofile`;
+    const body = new FormData();
+    body.append("id", id);
+    body.append("name", name);
+    body.append("age", age);
+    body.append("location", location);
+    body.append("bio", bio);
+    const response = await dating_pages.postAPI(updateurl, body, api_token);
+    console.log(response);
+  });
+  // get likes
 };
 
 // chats_container.innerHTML += `

@@ -67,13 +67,12 @@ class UserController extends Controller
 
         $user->update([
             "name" =>$request->name,
-            "email" => $request->email,
             "age" => $request->age,
             "location"=>$request->location,
             "bio"=>$request->bio
         ]);
 
-        return response()->json(['message' => 'User profile updated successfully', 'user' => $user]);
+        return response()->json(['message' => 'User profile updated successfully']);
     }
     // upload image
     function uploadImage(Request $request){
