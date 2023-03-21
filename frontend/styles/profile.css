@@ -9,7 +9,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-
+  height: 9vh;
   background-color: #f99b9b;
 }
 
@@ -50,7 +50,7 @@ button {
   transition: 0.3s;
 }
 button:hover {
-  transform: scale(1.25);
+  transform: scale(1.15);
   cursor: pointer;
 }
 
@@ -85,6 +85,88 @@ h2 {
 h1 {
   margin: 20px 0;
 }
+/* images */
+.extraPics {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
+
+.extraPics > img {
+  object-fit: cover;
+}
+img:hover {
+  transform: scale(1.15);
+  transition: transform 0.5s ease-in-out;
+}
+/* edit info*/
+label {
+  display: block;
+  margin: 10px 20px;
+  font-weight: bold;
+  color: #333;
+  font-size: 18px;
+}
+input[type="text"],
+input[type="number"],
+input[type="bio"] {
+  width: 30%;
+  padding: 10px;
+  margin-left: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4;
+  font-size: 16px;
+  background-color: #f2f2f2;
+}
+/* cards */
+
+.cards_container {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.user_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 250px;
+  height: 350px;
+}
+.user_card img {
+  width: 80%;
+  height: 60%;
+  object-fit: cover;
+  border-radius: 70%;
+  margin-bottom: 20px;
+}
+
+.user_card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.user_actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.user_actions button {
+  background-color: #f99b9b;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+}
 
 @media (max-width: 700px) {
   .optional {
@@ -102,5 +184,10 @@ h1 {
   }
   .nav_container {
     font-size: 10px;
+  }
+  .extraPics {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
   }
 }
