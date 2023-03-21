@@ -326,6 +326,21 @@ dating_pages.load_profile = async () => {
     });
   });
 
+  image_input3.addEventListener("change", () => {
+    let file = image_input3.files[0];
+    reader.readAsDataURL(file);
+    reader.addEventListener("load", async () => {
+      const encoded = reader.result.split(",")[1];
+      const body = new FormData();
+      body.append("encoded", encoded);
+      console.log(body);
+      const imageupload = `${dating_pages.base_url}actions/upload/${id}`;
+      const response = await dating_pages.postAPI(imageupload, body, api_token);
+      console.log(response);
+      const image3 = document.getElementById("image3");
+      image3.setAttribute("src", `http://127.0.0.1:8000/images/${id}op3.png`);
+    });
+  });
   const logout = document.getElementById("logout");
   logout.addEventListener("click", async () => {
     localStorage.clear();
