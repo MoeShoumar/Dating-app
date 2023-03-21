@@ -54,7 +54,7 @@ dating_pages.load_signin = async () => {
     if (response.status == "200") {
       console.log(response);
       localStorage.setItem("jwt", response.data.access_token);
-      // window.location.href = "users_list.html";
+      window.location.href = "users_list.html";
       localStorage.setItem("id", response.data.user_id);
     } else {
       const error_message = document.getElementById("error_message");
@@ -78,9 +78,7 @@ dating_pages.load_signup = async () => {
     const age = document.getElementById("age").value;
     const image_input = document.getElementById("profile_pic").files[0];
     const reader = new FileReader();
-
     reader.readAsDataURL(image_input);
-
     reader.addEventListener("load", async () => {
       const encoded = reader.result.split(",")[1];
 
@@ -96,9 +94,9 @@ dating_pages.load_signup = async () => {
 
       const signup_url = `${dating_pages.base_url}auth/register`;
       const response_signup = await dating_pages.postAPI(signup_url, body);
-
-      localStorage.setItem("id", response_signup.user.id);
-
+      console.log(response_signup);
+      localStorage.setItem("id", response_signup.data.user.id);
+      console.log(body);
       if ((response_signup.status = 201)) {
         window.location.href = "signin.html";
         console.log(response_signup);
@@ -305,6 +303,11 @@ dating_pages.load_profile = async () => {
       const response = await dating_pages.postAPI(imageupload, body, api_token);
       console.log(response);
     });
+  });
+  const logout = document.getElementById("logout");
+  logout.addEventListener("click", async () => {
+    sessionStorage.clear();
+    window.location.href = "signin.html";
   });
 };
 
