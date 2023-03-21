@@ -30,7 +30,8 @@ Route::group(['middleware' => 'api'], function($router) {
         Route::group(['prefix' => 'actions'], function () {
             Route::post('/likeuser/{sender_id}/{receiver_id}', [ActionController::class, "likeuser"]);
             Route::post('/blockuser/{sender_id}/{receiver_id}', [ActionController::class, "blockuser"]);
-            Route::post('/sendmessage/{sender_id}/{receiver_id}', [ActionController::class, "sendmessage"]);        
+            Route::post('/sendmessage/{sender_id}/{receiver_id}', [ActionController::class, "sendmessage"]); 
+            Route::post('/upload/{id}', [ActionController::class, "imageupload"]);       
         });
     
 });

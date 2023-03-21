@@ -26,14 +26,35 @@
       <h2>Upload Optional Images</h2>
     </div>
       <div class="extraPics">
-        <div>
+        <div class="image_card">
           <img id="image1" src="assets/optinal.png" alt="Image 1">
+          <input
+          type="file"
+          name="profile-pic"
+          id="profile_pic1"
+          accept="image/*"
+          required
+        />
         </div>
-        <div>
+        <div class="image_card">
           <img id="image2" src="assets/optinal.png" alt="Image 2">
+          <input
+          type="file"
+          name="profile-pic"
+          id="profile_pic2"
+          accept="image/*"
+          required
+        />
         </div>
-        <div>
+        <div class="image_card">
           <img id="image3" src="assets/optinal.png" alt="Image 3">
+          <input
+          type="file"
+          name="profile-pic"
+          id="profile_pic3"
+          accept="image/*"
+          required
+        />
         </div>
     </div>
     </div>
@@ -47,6 +68,7 @@
       <input type="number" name="age" id="age"/>
       <label for="bio">Edit Bio:</label>
       <input type="text" name="bio" id="bio" required />
+      <button type="submit">Edit</button>
     </div>
     <hr>
     <div class="liked_users">

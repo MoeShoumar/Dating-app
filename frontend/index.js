@@ -282,7 +282,21 @@ dating_pages.load_userslist = async () => {
       }
     });
   });
-  //
+};
+
+dating_pages.load_profile = async () => {
+  const image_input1 = document.getElementById("profile_pic1").files[0];
+  const image_input2 = document.getElementById("profile_pic2").files[0];
+  const image_input3 = document.getElementById("profile_pic3").files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(image_input1);
+  reader.addEventListener("load", async () => {
+    const encoded = reader.result.split(",")[1];
+    const body = new FormData();
+    body.append("pic", encoded);
+    const imageupload = `${dating_pages.base_url}auth/register`;
+    const response_signup = await dating_pages.postAPI(signup_url, body);
+  });
 };
 
 // chats_container.innerHTML += `
