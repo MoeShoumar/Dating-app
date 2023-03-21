@@ -299,15 +299,17 @@ dating_pages.load_profile = async () => {
     reader.addEventListener("load", async () => {
       const encoded = reader.result.split(",")[1];
       const body = new FormData();
-      body.append("pic", encoded);
+      body.append("encoded", encoded);
       // body.append("number", 1);
       console.log(body);
       let api_token = localStorage.getItem("jwt");
       let id = localStorage.getItem("id");
-
       const imageupload = `${dating_pages.base_url}actions/upload/${id}`;
       const response = await dating_pages.postAPI(imageupload, body, api_token);
       console.log(response);
+      const image1 = document.getElementById("image1");
+
+      image1.setAttribute("src", `http://127.0.0.1:8000/images/${id}op1.png`);
     });
   });
   const logout = document.getElementById("logout");
