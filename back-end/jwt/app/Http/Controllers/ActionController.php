@@ -69,10 +69,8 @@ class ActionController extends Controller
     return response()->json(['message'=>'user blocked']);
     }
   }
-  function imageupload(Request $request, $id){
+  function imageupload1(Request $request, $id){
     $encoded = $request->encoded;
-    // $id = $request->id;
-    // $number = $request->number;
     $decoded = base64_decode($encoded);
 
     $file_path = public_path('images/'. $id . 'op1' . '.png');
@@ -83,6 +81,31 @@ class ActionController extends Controller
     
     return response()->json(['message'=>'success']);
 }
+function imageupload2(Request $request, $id){
+  $encoded = $request->encoded;
+  $decoded = base64_decode($encoded);
+
+  $file_path = public_path('images/'. $id . 'op2' . '.png');
+
+  file_put_contents($file_path,$decoded);
+
+  User::where("id",$id)->update("profilePic", "http://localhost/images" . $id . ".png");
+  
+  return response()->json(['message'=>'success']);
+}
+function imageupload3(Request $request, $id){
+  $encoded = $request->encoded;
+  $decoded = base64_decode($encoded);
+
+  $file_path = public_path('images/'. $id . 'op3' . '.png');
+
+  file_put_contents($file_path,$decoded);
+
+  User::where("id",$id)->update("profilePic", "http://localhost/images" . $id . ".png");
+  
+  return response()->json(['message'=>'success']);
+}
+
 
   }
 
