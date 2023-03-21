@@ -291,10 +291,26 @@ dating_pages.load_userslist = async () => {
 
 dating_pages.load_profile = async () => {
   const image_input1 = document.getElementById("profile_pic1");
-  const image_input2 = document.getElementById("profile_pic2").files[0];
-  const image_input3 = document.getElementById("profile_pic3").files[0];
-  image_input1.addEventListener("change", (event) => {
+  const image_input2 = document.getElementById("profile_pic2");
+  const image_input3 = document.getElementById("profile_pic3");
+  let api_token = localStorage.getItem("jwt");
+  let id = localStorage.getItem("id");
+  image_input1.addEventListener("change", () => {
     let file = image_input1.files[0];
+    reader.readAsDataURL(file);
+    reader.addEventListener("load", async () => {
+      const encoded = reader.result.split(",")[1];
+      const body = new FormData();
+      body.append("encoded", encoded);
+      const imageupload = `${dating_pages.base_url}actions/upload/${id}`;
+      const response = await dating_pages.postAPI(imageupload, body, api_token);
+      const image1 = document.getElementById("image1");
+      image1.setAttribute("src", `http://127.0.0.1:8000/images/${id}op1.png`);
+    });
+  });
+
+  image_input2.addEventListener("change", () => {
+    let file = image_input2.files[0];
     reader.readAsDataURL(file);
     reader.addEventListener("load", async () => {
       const encoded = reader.result.split(",")[1];
@@ -302,16 +318,14 @@ dating_pages.load_profile = async () => {
       body.append("encoded", encoded);
       // body.append("number", 1);
       console.log(body);
-      let api_token = localStorage.getItem("jwt");
-      let id = localStorage.getItem("id");
       const imageupload = `${dating_pages.base_url}actions/upload/${id}`;
       const response = await dating_pages.postAPI(imageupload, body, api_token);
       console.log(response);
-      const image1 = document.getElementById("image1");
-
-      image1.setAttribute("src", `http://127.0.0.1:8000/images/${id}op1.png`);
+      const image2 = document.getElementById("image2");
+      image2.setAttribute("src", `http://127.0.0.1:8000/images/${id}op2.png`);
     });
   });
+
   const logout = document.getElementById("logout");
   logout.addEventListener("click", async () => {
     localStorage.clear();
