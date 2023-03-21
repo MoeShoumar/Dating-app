@@ -302,7 +302,7 @@ dating_pages.load_profile = async () => {
       const encoded = reader.result.split(",")[1];
       const body = new FormData();
       body.append("encoded", encoded);
-      const imageupload = `${dating_pages.base_url}actions/upload/${id}`;
+      const imageupload = `${dating_pages.base_url}actions/upload1/${id}`;
       const response = await dating_pages.postAPI(imageupload, body, api_token);
       const image1 = document.getElementById("image1");
       image1.setAttribute("src", `http://127.0.0.1:8000/images/${id}op1.png`);
@@ -318,7 +318,7 @@ dating_pages.load_profile = async () => {
       body.append("encoded", encoded);
       // body.append("number", 1);
       console.log(body);
-      const imageupload = `${dating_pages.base_url}actions/upload/${id}`;
+      const imageupload = `${dating_pages.base_url}actions/upload2/${id}`;
       const response = await dating_pages.postAPI(imageupload, body, api_token);
       console.log(response);
       const image2 = document.getElementById("image2");
@@ -334,7 +334,7 @@ dating_pages.load_profile = async () => {
       const body = new FormData();
       body.append("encoded", encoded);
       console.log(body);
-      const imageupload = `${dating_pages.base_url}actions/upload/${id}`;
+      const imageupload = `${dating_pages.base_url}actions/upload3/${id}`;
       const response = await dating_pages.postAPI(imageupload, body, api_token);
       console.log(response);
       const image3 = document.getElementById("image3");
