@@ -1,5 +1,6 @@
 const dating_pages = {};
 dating_pages.base_url = "http://localhost:8000/api/v0.0.1/";
+const reader = new FileReader();
 
 dating_pages.getAPI = async (api_url, id, api_token = null) => {
   try {
@@ -53,7 +54,7 @@ dating_pages.load_signin = async () => {
     if (response.status == "200") {
       console.log(response);
       localStorage.setItem("jwt", response.data.access_token);
-      window.location.href = "users_list.html";
+      // window.location.href = "users_list.html";
       localStorage.setItem("id", response.data.user_id);
     } else {
       const error_message = document.getElementById("error_message");
@@ -285,17 +286,25 @@ dating_pages.load_userslist = async () => {
 };
 
 dating_pages.load_profile = async () => {
-  const image_input1 = document.getElementById("profile_pic1").files[0];
+  const image_input1 = document.getElementById("profile_pic1");
   const image_input2 = document.getElementById("profile_pic2").files[0];
   const image_input3 = document.getElementById("profile_pic3").files[0];
-  const reader = new FileReader();
-  reader.readAsDataURL(image_input1);
-  reader.addEventListener("load", async () => {
-    const encoded = reader.result.split(",")[1];
-    const body = new FormData();
-    body.append("pic", encoded);
-    const imageupload = `${dating_pages.base_url}auth/register`;
-    const response_signup = await dating_pages.postAPI(signup_url, body);
+  image_input1.addEventListener("change", (event) => {
+    let file = image_input1.files[0];
+    reader.readAsDataURL(file);
+    reader.addEventListener("load", async () => {
+      const encoded = reader.result.split(",")[1];
+      const body = new FormData();
+      body.append("pic", encoded);
+      // body.append("number", 1);
+      console.log(body);
+      let api_token = localStorage.getItem("jwt");
+      let id = localStorage.getItem("id");
+
+      const imageupload = `${dating_pages.base_url}actions/upload/${id}`;
+      const response = await dating_pages.postAPI(imageupload, body, api_token);
+      console.log(response);
+    });
   });
 };
 

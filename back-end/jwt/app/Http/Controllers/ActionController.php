@@ -72,10 +72,11 @@ class ActionController extends Controller
   function uploadImage(Request $request, $id){
     $encoded = $request->encoded;
     $id = $request->id;
+    // $number = $request->number;
 
     $decoded = base64_decode($encoded);
 
-    $file_path = public_path('images/'. $id . 'op1'. '.png');
+    $file_path = public_path('images/'. $id . 'op' . '.png');
 
     file_put_contents($file_path,$decoded);
 
