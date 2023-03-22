@@ -1,6 +1,7 @@
 const dating_pages = {};
 dating_pages.base_url = "http://localhost:8000/api/v0.0.1/";
 const reader = new FileReader();
+let allUsers = [];
 
 dating_pages.getAPI = async (api_url, id, api_token = null) => {
   try {
@@ -139,6 +140,7 @@ dating_pages.load_userslist = async () => {
   const response = await dating_pages.getAPI(users_url, id, api_token);
   console.log(response);
   let users_data = response.users;
+  allUsers = response.users;
   console.log(users_data);
   usersLoader(users_data, cards_container);
 
@@ -348,12 +350,12 @@ dating_pages.load_profile = async () => {
     window.location.href = "signin.html";
   });
   // update info
-  const edit_btn = document.getElementById("edit_btn");
-  const name = document.getElementById("name").value;
-  const location = document.getElementById("location").value;
-  const bio = document.getElementById("bio").value;
-  const age = document.getElementById("age").value;
   edit_btn.addEventListener("click", async () => {
+    const edit_btn = document.getElementById("edit_btn");
+    const name = document.getElementById("name").value;
+    const location = document.getElementById("location").value;
+    const bio = document.getElementById("bio").value;
+    const age = document.getElementById("age").value;
     const updateurl = `${dating_pages.base_url}user/editprofile`;
     const body = new FormData();
     body.append("id", id);
@@ -365,7 +367,57 @@ dating_pages.load_profile = async () => {
     console.log(response);
   });
   // get likes
+  const liked_users_url = `${dating_pages.base_url}user/favorites/${id}`;
+  const cards_container = document.getElementById("liked_cards_container");
+  const liked_response = await dating_pages.getAPI(
+    liked_users_url,
+    id,
+    api_token
+  );
+  let liked_users_data = liked_response.favorites;
+  console.log(liked_users_data);
+
+  cards_container.innerHTML = "";
+  for (let i = 0; i < liked_users_data.length; i++) {
+    cards_container.innerHTML += `
+          <div class="user_card ${liked_users_data[i].liked.name}" id="user_card_${liked_users_data[i].liked.id}">
+            <img src="http://localhost:8000/images/${liked_users_data[i].liked.id}.png" alt="" id="image" />
+            <h2>${liked_users_data[i].liked.name}</h2>
+            <h3>Age:${liked_users_data[i].liked.age} </h3>
+            <h3>Location: ${liked_users_data[i].liked.location}</h3>
+          </div>`;
+  }
+
+  // // get blocks
+  // const blocked_users_url = `${dating_pages.base_url}user/favorites/${id}`;
+  // const blocked_cards_container = document.getElementById(
+  //   "blocked_cards_container"
+  // );
+  // const blocked_response = await dating_pages.getAPI(
+  //   blocked_users_url,
+  //   id,
+  //   api_token
+  // );
+  // console.log(response);
+  // let blocked_users_data = response.users;
+  // console.log(blocked_users_data);
+
+  // blocked_cards_container.innerHTML = "";
+  // for (let i = 0; i < blocked_users_data.length; i++) {
+  //   blocked_cards_container.innerHTML += `
+  //         <div class="user_card ${blocked_users_data[
+  //           i
+  //         ].name.toLowerCase()}" id="user_card_${blocked_users_data[i].id}">
+  //           <img src="http://localhost:8000/images/${
+  //             blocked_users_data[i].id
+  //           }.png" alt="" id="image" />
+  //           <h2>${blocked_users_data[i].name}</h2>
+  //           <h3>Age:${blocked_users_data[i].age} </h3>
+  //           <h3>Location: ${blocked_users_data[i].location}</h3>
+  //         </div>`;
+  // }
 };
+// get blocks
 
 // chats_container.innerHTML += `
 // <div class="user_card  ${users_data[
