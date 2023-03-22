@@ -417,7 +417,6 @@ dating_pages.load_profile = async () => {
   //         </div>`;
   // }
 };
-// get blocks
 
 // chats_container.innerHTML += `
 // <div class="user_card  ${users_data[
@@ -437,46 +436,3 @@ dating_pages.load_profile = async () => {
 //   }"  class="message_btn">Message</button>
 // </div>
 // </div>`;
-
-// upload images
-// dating_pages.load_profile = async () => {
-//   const mainPic = document.getElementById("profile_main");
-//   const optionalCards = document.querySelectorAll(".optional .card");
-//   mainPic.addEventListener("click", () => {
-//     const imageInput = document.createElement("input");
-//     imageInput.type = "file";
-//     imageInput.accept = "image/*";
-//     const reader = new FileReader();
-//     let encoded;
-//     imageInput.addEventListener("change", (event) => {
-//       reader.readAsDataURL(event.target.files[0]);
-//       reader.addEventListener("load", () => {
-//         mainPic.querySelector("img").src = reader.result;
-//         encoded = reader.result;
-//       });
-//     });
-//     imageInput.click();
-//   });
-
-//   optionalCards.forEach((card) => {
-//     optionalCards.addEventListener("click", () => {
-//       const imageInput = document.createElement("input");
-//       imageInput.type = "file";
-//       imageInput.accept = "image/*";
-//       imageInput.addEventListener("change", (event) => {
-//         const reader = new FileReader();
-//         reader.readAsDataURL(event.target.files[0]);
-//         reader.onload = () => {
-//           card.querySelector("img").src = reader.result;
-//         };
-//       });
-//       imageInput.click();
-//     });
-
-//     upload_btn.addEventListener("submit", async (event) => {
-//       event.preventDefault();
-//       const body = new FormData();
-//       body.append("encoded", encoded.split(",")[1]);
-//     });
-//   });
-// };
