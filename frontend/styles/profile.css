@@ -128,7 +128,7 @@ input[type="bio"] {
 /* cards */
 
 .cards_container {
-  width: 60%;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -161,34 +161,6 @@ input[type="bio"] {
   font-size: 1.5rem;
   margin-bottom: 20px;
 }
-.user_actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-.user_actions button {
-  background-color: #f99b9b;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-}
-button[type="submit"] {
-  display: block;
-  width: 20%;
-  padding: 8px;
-  margin: 15px 0;
-  margin-left: 70px;
-  border: none;
-  border-radius: 5px;
-  background-color: #f99b9b;
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
 
 @media (max-width: 700px) {
   .optional {
@@ -211,5 +183,15 @@ button[type="submit"] {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+  }
+
+  .logo {
+    font-size: 15px;
+  }
+  nav ul li a {
+    font-size: 15px;
+  }
+  button {
+    font-size: 15px;
   }
 }
