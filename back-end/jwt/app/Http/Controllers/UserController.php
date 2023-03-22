@@ -48,16 +48,19 @@ class UserController extends Controller
         ]);
     }
     // display blocked users
-    function getblocks($sender_id, $receiver_id){
-        $block = blocks::where('sender_id', $sender_id)->where('receiver_id', $receiver_id)->get();
+    function getblocks($id){
+        $block = blocks::where('id', $id)->get();
         return response()->json([
             "block" =>  $block
         ]);
     }
     
     // display liked
-    function getfavorites($sender_id, $receiver_id){
-       $favorites = favorites::where('sender_id',$sender_id)->where( 'receiver_id' ,$receiver_id)->get();
+    function getfavorites($id){
+       $favorites = favorites::where('sender_id',$id)->with("liked")->get();
+
+        
+
        return response()->json(['favorites'=> $favorites]);
     }
     // edit profile 
