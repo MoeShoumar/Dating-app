@@ -10,6 +10,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  height: 9vh;
   background-color: #f99b9b;
 }
 
@@ -39,7 +40,7 @@ nav ul li a:hover {
   color: red;
   transition: 0.4s;
 }
-button {
+.like_button {
   border: none;
   background-color: red;
   padding: 12px 30px;
@@ -49,7 +50,7 @@ button {
   font-size: 25px;
   transition: 0.3s;
 }
-button:hover {
+.like_button:hover {
   transform: scale(1.15);
   cursor: pointer;
 }
@@ -64,20 +65,17 @@ button:hover {
   border-radius: 5px;
   color: rgba(0, 0, 0, 0.6);
   background-color: rgba(205, 205, 205, 0.4);
-  /* background-image: url("/frontend/assets/search-icon.png");
-  background-repeat: no-repeat;
-  background-position: 0.5rem; */
   padding-left: 2.6rem;
   transition: all 0.3s;
 }
-.search-icon {
+*/
+/* .search-icon {
   position: absolute;
   left: 0.5rem;
-}
-.search-container {
+} */
+/* .search-container {
   transform: translateX(-50%);
   margin-left: 10%;
-  display: flex;
 }
 .search:focus {
   color: rgba(0, 0, 0, 0.8);
@@ -86,8 +84,8 @@ button:hover {
   background-color: rgba(255, 255, 255, 1);
   transition: all 0.3s ease-out;
   box-shadow: 5px 5px 10px rgba(69, 69, 69, 0.2);
-}
-.search-icon {
+} */
+/* .search-icon {
   object-fit: cover;
   size: 50%;
 }
@@ -145,6 +143,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  max-width: 100%;
 }
 
 .user_actions button {
@@ -241,4 +240,37 @@ select {
   display: flex;
   flex-direction: column;
   margin: 20px 20px;
+}
+@media (max-width: 700px) {
+  .optional {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    margin: 20px 0;
+  }
+  .profile_main {
+    height: 100vh;
+    width: 100vw;
+  }
+  .nav_container {
+    font-size: 10px;
+  }
+  .extraPics {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    font-size: 15px;
+  }
+  nav ul li a {
+    font-size: 15px;
+  }
+  .like_button {
+    font-size: 15px;
+  }
 }
