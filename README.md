@@ -4,10 +4,12 @@ This is a dating website created using Laravel for the backend and HTML, CSS, an
 ## **Features**
  This dating website has the following features:
 
-User registration and login
-Profile creation and editing
-Searching for other users based on criteria such as age and location
-Messaging other users
+- User registration and login
+- Profile creation and editing
+- Searching for other users based on criteria such as age and location
+- Messaging other users
+- User will receive notifications when someone favorites or blocks his/her profile
+- User can favorite or block anyone from the users' list. 
 ## **Getting Started**
 To run the project locally, follow these steps:
 
